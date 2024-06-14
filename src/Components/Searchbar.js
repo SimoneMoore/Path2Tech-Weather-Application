@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
-function Searchbar({ handleSubmit }) {
-    const [searchTerm, setSearchTerm] = useState('');
-    function handleChange(event) {
-        setSearchTerm(event.target.value);
-    }
+function Searchbar({ handleSubmit, searchTerm, handleChange, id, children, isFocused= true }) {
+    const inputRef= useRef();
+    useEffect(() => {
+        if(isFocused && inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [isFocused]);
     return (
         <section className='search-bar-container'>
             <form onSubmit={handleSubmit}>
-                <label htmlFor='search-city'>
-                    <strong>Search Term: {searchTerm} </strong>
+                <label htmlFor={id}>
+                    {/* Must use children key name */}
+                    {children}
                     <br></br>
                     <input 
                     type='text'
                     placeholder='Search City'
-                    id='search-city'
+                    id={id}
                     name='search-city'
-                    onChange= {handleChange} 
+                    onChange={handleChange}
+                    value={searchTerm}
+                    ref= {inputRef}
                     ></input>
                 </label>
                 <button 
