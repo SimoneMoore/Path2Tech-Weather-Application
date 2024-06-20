@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Searchbar from './Components/Searchbar';
 import WeatherData from './Components/Weatherdata';
@@ -28,11 +28,28 @@ function App() {
   const [weatherData, setWeatherData] = useState([]);
   const[loading, setLoading]= useState(false);
   const [error, setError]= useState(false);
+  const [city, setCity]= useState(searchTerm);
+  const fetchDataCallback = useCallback(async () => {
+    try {
+      setLoading(true);
+      // Throw new error ("error") is a way to test error conditions
+      const response = await getWeatherData(city);
+      console.log(response.data.list);
+      setWeatherData(response.data.list);
+      setLoading(false);
+    } catch {
+      // An impossible state wis when two states, like an error and loading, being present at the same time but conflict
+      setError(true);
+      setLoading(false);
+    }
+  
+  }, [city]);
   function handleChange(event) {
     setSearchTerm(event.target.value);
   }
   function handleSubmit(event) {
     event.preventDefault();
+    setCity(searchTerm)
     console.log("submitting...");
     }
     useEffect(()=> {
@@ -47,22 +64,9 @@ function App() {
       // return () => console.log("Clean up function.");
     }, [searchTerm]);
     useEffect(() => {
-      async function fetchData() {
-        try {
-          setLoading(true);
-          // Throw new error ("error") is a way to test error conditions
-          const response = await getWeatherData();
-          console.log(response.data.list);
-          setWeatherData(response.data.list);
-          setLoading(false);
-        } catch {
-          // An impossible state wis when two states, like an error and loading, being present at the same time but conflict
-          setError(true);
-          setLoading(false);
-        }
-      }
-      fetchData();
-    }, []);
+      fetchDataCallback();
+    }, [fetchDataCallback]);
+    console.log("non-memoized");
   return (
     <div id="main" className="container">
       {/* {`${true ? "container" : "no-container"}`} is another way you can styler class name with a ternary operator */}
