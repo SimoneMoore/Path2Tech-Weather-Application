@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Main from './Pages/Main';
 import About from './Pages/About';
-import NavBar from '.Components/NavBar';
+import NavBar from './Components/NavBar';
 // const weatherData = [
 //   {
 //     day: "Monday",
@@ -28,7 +28,7 @@ return(
     <NavBar></NavBar>
   <Routes>
     <Route path="/" element={<Main></Main>}></Route>
-    <Route path="/about" element={<About></About>}></Route>
+    <Route path="/about/:id" element={<About></About>}></Route>
     {/*  <Route path="/about/:id" element={<About></About>}></Route> is a way to include parameters in your */}
       </Routes>
   </section>

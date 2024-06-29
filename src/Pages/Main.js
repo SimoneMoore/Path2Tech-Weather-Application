@@ -19,7 +19,7 @@ const Main = () => {
       setWeatherData(response.data.list);
       setLoading(false);
     } catch {
-      // An impossible state wis when two states, like an error and loading, being present at the same time but conflict
+      // An impossible state is when two states, like an error and loading, being present at the same time but conflict
       setError(true);
       setLoading(false);
     }
@@ -63,7 +63,7 @@ const Main = () => {
       </Searchbar>
       {/* Ternary Operator , like if else*/}
       {true ? <p>My condition is true</p>: <p>My condition is false</p>}
-      {/* Double Ampersand; both methods (above) are used fro conditional rendering */}
+      {/* Double Ampersand; both methods (above) are used for conditional rendering */}
       {error && <p>There was an error loading your data</p>}
       {/* Iterating through array */}
       {loading ? <p>Data Loading</p>: (

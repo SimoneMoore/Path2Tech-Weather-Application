@@ -6,7 +6,7 @@ export default function weatherData({ list }) {
     // console.log(event.target.value)}
     return (
       <>
-      <p>Here is the list of the current 7 Day forecast</p>
+       {true ? <p>Here is the list of the current 7 Day forecast</p>: <p>My condition is false</p>}
       {list.map((item)=>(
             <div key= {item.dt} className="weather-card">
               {/* <button type="button" onClick={handleClick} value= {item.temperature}>Check My Temperature</button> */}
