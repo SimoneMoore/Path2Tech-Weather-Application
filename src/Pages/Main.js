@@ -31,6 +31,7 @@ const Main = () => {
   function handleSubmit(event) {
     event.preventDefault();
     setCity(searchTerm);
+    setError(false);
     console.log("submitting...");
   }
   useEffect(()=> {
@@ -52,6 +53,7 @@ const Main = () => {
     <div id="main" className="container">
       {/* {`${true ? "container" : "no-container"}`} is another way you can styler class name with a ternary operator */}
       {/* Search Bar Component */}
+      <section id="search" className="searchbar">
       <Searchbar handleSubmit={handleSubmit} searchTerm= {searchTerm} handleChange= {handleChange} id= {'search-city'}>
         <strong>Search City: {searchTerm}</strong>
         {/* <em>This is your location: {searchTerm}</em> */}
@@ -61,15 +63,23 @@ const Main = () => {
         {/* </section> */}
         {/* Render JSX to target children tag */}
       </Searchbar>
+      </section>
+      <section id="weather" className="weather">
+      { true? <p>
+        <span style={{ fontSize:'140px',fontWeight:'bolder',marginLeft:'10px'}}>5</span>
+        <br/>
+        <span style={{ fontWeight:'bolder',marginLeft:'5px'}}>Day Forecast</span>
+      </p>: <p>Please Enter a City</p>
+      }
       {/* Ternary Operator , like if else*/}
-      {true ? <p>My condition is true</p>: <p>My condition is false</p>}
-      {/* Double Ampersand; both methods (above) are used for conditional rendering */}
-      {error && <p>There was an error loading your data</p>}
+      {/* {true ? <p>My condition is true</p>: <p>My condition is false</p>} */}
+      {/* Double Ampersand &&; both methods (above) are used for conditional rendering */}
+      { error? <p>There was an error loading your data</p>: null}
       {/* Iterating through array */}
       {loading ? <p>Data Loading</p>: (
         <WeatherData list= {weatherData} />
       )}
-      
+      </section>
     </div>
   );
 // }
