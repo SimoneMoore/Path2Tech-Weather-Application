@@ -1,22 +1,26 @@
 import React from 'react';
-
+import moment from 'moment';
 
 export default function weatherData({ list }) {
+    const desiredHours = [6, 12, 18];
   // function handleClick(event) {
     // console.log(event.target.value)}
     return (
       <>
-       {true ? <p>Here is the list of the current 7 Day forecast</p>: <p>My condition is false</p>}
-      {list.map((item)=>(
-            <div key= {item.dt} className="weather-card">
+      {list.filter(item => {
+        const hour = moment(item.dt_txt).hour();
+        return desiredHours.includes(hour);
+        }).map((item)=>(
+            <div key= {item} className="weather-card">
               {/* <button type="button" onClick={handleClick} value= {item.temperature}>Check My Temperature</button> */}
               {/* onClick={() => handleClick(item.temperature)} in line handler example. [Callback function] When an it is not reusable. */}
-              <p>{item.dt_txt}</p>
-              {/* Challenge = <p>Current Time is {item.dt_txt.__}</p> */}
-              <p>Current Temperature is {item.main.temp}</p>
-              <p>Humidity: {item.main.humidity}</p>
-              <p>Lowest Temperature: {item.main.temp_min}</p>
-              <p>Feels Like: {item.main.feels_like}</p>
+              <p style={{ fontSize:'20px',fontWeight: 'bold',textAlign:'center'}}>{moment(item.dt_txt).format('MMMM Do')}<br/>{moment(item.dt_txt).format('h:mma')}</p>
+              {/* Challenge = <p>Current Time is {item.dt_txt}</p> */}
+              <p>Temperature is {Math.floor(item.main.temp)}°F</p>
+              <p>Expect {item.weather[0].description}</p>
+              <p>Humidity: {item.main.humidity}%</p>
+              <p>Lowest Temperature: {Math.floor(item.main.temp_min)}°F</p>
+              <p>Feels Like: {Math.floor(item.main.feels_like)}°F</p>
             </div>
     ))}
     </> 
