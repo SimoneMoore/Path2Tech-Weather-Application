@@ -77,6 +77,7 @@ const Main = () => {
       { error? <p>There was an error loading your data</p>: null}
       {/* Iterating through array */}
       {loading ? <p>Data Loading</p>: (
+        // prop element imported here
         <WeatherData list= {weatherData} />
       )}
       </section>
