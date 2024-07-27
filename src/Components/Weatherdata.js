@@ -6,7 +6,9 @@ export default function weatherData({ list }) {
   // function handleClick(event) {
     // console.log(event.target.value)}
     return (
-      <>
+      // this is the fragment
+      <> 
+      {/* this is the prop */}
       {list.filter(item => {
         const hour = moment(item.dt_txt).hour();
         return desiredHours.includes(hour);

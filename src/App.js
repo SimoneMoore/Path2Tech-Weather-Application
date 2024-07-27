@@ -26,11 +26,11 @@ function App() {
 return(
   <section>
     <NavBar></NavBar>
-  <Routes>
-    <Route path="/" element={<Main></Main>}></Route>
-    <Route path="/about/:id" element={<About></About>}></Route>
-    {/*  <Route path="/about/:id" element={<About></About>}></Route> is a way to include parameters in your */}
-      </Routes>
+    <Routes>
+      <Route path="/" element={<Main></Main>}></Route>
+      <Route path="/about/:id" element={<About></About>}></Route>
+      {/*  <Route path="/about/:id" element={<About></About>}></Route> is a way to include parameters in your */}
+    </Routes>
   </section>
 )
 }
